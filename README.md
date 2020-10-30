@@ -32,4 +32,4 @@ https://github.com/ShangJixin/Typecho-Plugin-fancyboxJQ
 
 **注：jQuery 引入依赖于 jsdelivr CDN**
 
-**下载完后，请务必将本插件的文件夹的名字改为**superLink**，否则会出错！！**
+**下载完后，请务必将本插件的文件夹的名字改为`superLink`，否则会出错！！**
