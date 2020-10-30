@@ -49,6 +49,7 @@ class JixinParser{
     /**
      * media_bilibili
      * 对B站视频进行相关的解析
+     * https://gitee.com/ComsenzDiscuz/DiscuzX/blob/master/upload/source/function/media/media_bilibili.php
      * 
      * @param $url 视频网站链接，丢进去进行判断，用于转换成iframe的url
      * @param $type 0:返回iframe 1|other:返回AV|BV号
