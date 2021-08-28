@@ -4,7 +4,7 @@
  * 
  * @package superLink
  * @author ShangJixin
- * @version 1.0
+ * @version 1.1
  * @link https://github.com/ShangJixin/Typecho-Plugin-superLink
  */
 class superLink_Plugin implements Typecho_Plugin_Interface
@@ -93,7 +93,7 @@ class superLink_Plugin implements Typecho_Plugin_Interface
        if(Helper::options()->plugin('superLink')->needjq){
             echo '<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>';
         }
-        echo '<script src="'.Helper::options()->pluginUrl .'/superLink/superlink.js"></script>';
+        echo '<script src="'.Helper::options()->pluginUrl .'/superLink/superlink.js?ver=2021.08.28.01"></script>';
     }
 
 }
