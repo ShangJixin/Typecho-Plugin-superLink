@@ -127,47 +127,7 @@ class JixinParser{
         $iframe = preg_replace('/https?:\/\/github.com\//is','https://api.github.com/repos/',$url);
         $repo = preg_replace('/https?:\/\/github.com\//is','',$url);
         return '<div class="JixinParser-card" data-src="'.$iframe.'"><div class="JixinParser-card-meta"><a href="'.$url.'" target="_blank" rel="external nofollow">'.$repo.'</a><span>Github</span></div><div class="iframe-container">Loading...</div></div>
-        <script>
-        $(document).ready(function(){
-            $(".JixinParser-card[data-src=\''.$iframe.'\'] .iframe-container").attr("style","padding: 3px 10px;font-size: 13px;");
-            $.ajax({
-                url: "'.$iframe.'",
-                type: "get",
-                success: function(data){
-            
-                    //console.log(data);
-                    $(".JixinParser-card[data-src=\''.$iframe.'\'] .iframe-container").empty();
-                    //$(".JixinParser-card[data-src=\''.$iframe.'\'] .iframe-container").append("success");
-                    $.each(data,function(key,val){
-                    
-				        if (key == "description"){
-					        $(".JixinParser-card[data-src=\''.$iframe.'\'] .iframe-container").append(val).append("<br>");
-				        }
-				        if (key == "homepage"){
-					        $(".JixinParser-card[data-src=\''.$iframe.'\'] .iframe-container").append(val).append("<br><br>");
-				        }
-				        if (key == "stargazers_count"){
-				            $(".JixinParser-card[data-src=\''.$iframe.'\'] .iframe-container").append("<span style=\"color:#666\">Star: "+val+"</span>&nbsp;&nbsp;");
-				        }
-				        if (key == "forks_count"){
-				            $(".JixinParser-card[data-src=\''.$iframe.'\'] .iframe-container").append("<span style=\"color:#666\">Fork: "+val+"</span>&nbsp;&nbsp;");
-				        }
-                    });
-                    $.each(data,function(key,val){
-				        if (key == "language"){
-				            $(".JixinParser-card[data-src=\''.$iframe.'\'] .iframe-container").append("<span style=\"color:#666\">Lang: "+val+"</span>&nbsp;&nbsp;");
-				        }
-				        if (key == "default_branch"){
-				            $(".JixinParser-card[data-src=\''.$iframe.'\'] .iframe-container").append("<span style=\"color:#666\">Branch: "+val+"</span>&nbsp;&nbsp;");
-				        }
-                    });
-                },
-                error: function(){
-                    $(".JixinParser-card[data-src=\''.$iframe.'\'] .iframe-container").append("Ajax Request Failed!");
-                }
-            });
-        });
-        </script>';
+        <script>$(function(){JixinParser_Github(\''.$iframe.'\');});</script>';
     }
 
 }
