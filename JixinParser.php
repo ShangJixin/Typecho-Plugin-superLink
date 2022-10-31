@@ -91,7 +91,7 @@ class JixinParser{
      * @return 解析好待替换的HTML内容
      */
     private function pregBilibili($url,$iframe){
-        return '<div class="JixinParser-card" data-src="'.$iframe.'"><div class="JixinParser-card-meta"><a href="'.$url.'" target="_blank" rel="external nofollow">'.$this->media_bilibili($url,"1").'</a><span class="fold">展开/收起</span></div><div class="iframe-container"></div></div>';
+        return '<div class="JixinParser-card bilibili" data-src="'.$iframe.'"><div class="JixinParser-card-meta"><a href="'.$url.'" target="_blank" rel="external nofollow">'.$this->media_bilibili($url,"1").'</a><span class="fold">展开/收起</span></div><div class="iframe-container"></div></div>';
     }
     
     /**
@@ -126,8 +126,7 @@ class JixinParser{
     private function pregGithub($url,$iframe = NULL){
         $iframe = preg_replace('/https?:\/\/github.com\//is','https://api.github.com/repos/',$url);
         $repo = preg_replace('/https?:\/\/github.com\//is','',$url);
-        return '<div class="JixinParser-card" data-src="'.$iframe.'"><div class="JixinParser-card-meta"><a href="'.$url.'" target="_blank" rel="external nofollow">'.$repo.'</a><span>Github</span></div><div class="iframe-container">Loading...</div></div>
-        <script>$(function(){JixinParser_Github(\''.$iframe.'\');});</script>';
+        return '<div class="JixinParser-card github" data-src="'.$iframe.'"><div class="JixinParser-card-meta"><a href="'.$url.'" target="_blank" rel="external nofollow">'.$repo.'</a><span>Github</span></div><div class="iframe-container">Loading...</div></div>';
     }
 
 }
