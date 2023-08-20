@@ -25,8 +25,9 @@ window.onload = function(){
                                             `;
     
             },
-            error: function(){
-                ele.children[1].append("Ajax Request Failed!");
+            error: function(data){
+                ele.children[1].append(data.responseJSON.message ? data.responseJSON.message : "Ajax Request Failed!");
+                // console.log(data);
             }
         });
 
