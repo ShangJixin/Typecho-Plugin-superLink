@@ -34,8 +34,5 @@ https://github.com/ShangJixin/Typecho-Plugin-fancyboxJQ
 - 更多功能等待更新中...
 
 ## 插件使用说明
-是否加载 jQuery：为了防止重复引用 jQuery，给站点带来不必要的加载开销，所以设置此功能。如果你已经在主题内或者是其他插件已经加载过 jQuery，那就无需再次加载。
-
-**注：jQuery 引入依赖于 jsdelivr CDN**
 
 **下载完后，请务必将本插件的文件夹的名字改为`superLink`，否则会出错！！**
