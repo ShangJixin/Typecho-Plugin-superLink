@@ -3,8 +3,8 @@
  * <i>JixinParser->superLink();</i><br>无需再记忆短代码，只要输入符合解析规则的链接，就可解析为对应的卡片😎 <a href="https://github.com/ShangJixin/Typecho-Plugin-superLink">去 Github 仓库查看 superLink 支持了哪些解析&nbsp;&rsaquo;</a>
  * 
  * @package superLink
- * @author ShangJixin
- * @version 1.1
+ * @author 尚寂新
+ * @version 1.2
  * @link https://github.com/ShangJixin/Typecho-Plugin-superLink
  */
 class superLink_Plugin implements Typecho_Plugin_Interface
@@ -40,14 +40,7 @@ class superLink_Plugin implements Typecho_Plugin_Interface
      * @param Typecho_Widget_Helper_Form $form 配置面板
      * @return void
      */
-    public static function config(Typecho_Widget_Helper_Form $form){
-        
-        $needjq = new Typecho_Widget_Helper_Form_Element_Checkbox('needjq', array('yes' => _t('引用')), array('yes'), _t('是否加载jquery.min.js'));
-        $form->addInput($needjq);
-        
-        echo '<h2>插件使用说明</h2><p>是否加载 jQuery：为了防止重复引用 jQuery，给站点带来不必要的加载开销，所以设置此功能。如果你已经在主题内或者是其他插件已经加载过 jQuery，那就无需再次加载。</p><p><strong>注：jQuery 引入依赖于 jsdelivr CDN</strong></p>';
-
-    }
+    public static function config(Typecho_Widget_Helper_Form $form){}
     
     /**
      * 个人用户的配置面板
@@ -80,7 +73,7 @@ class superLink_Plugin implements Typecho_Plugin_Interface
      * @return void
      */
     public static function header() {
-        echo '<link rel="stylesheet" href="'.Helper::options()->pluginUrl .'/superLink/superlink.css" />';
+        echo '<link rel="stylesheet" href="'.Helper::options()->pluginUrl .'/superLink/superlink.css?ver=2024.01.13.01" />';
     }
 
     /**
@@ -89,11 +82,7 @@ class superLink_Plugin implements Typecho_Plugin_Interface
      * @return void
      */
     public static function footer() {
-        
-       if(Helper::options()->plugin('superLink')->needjq){
-            echo '<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>';
-        }
-        echo '<script src="'.Helper::options()->pluginUrl .'/superLink/superlink.js?ver=2021.08.28.01"></script>';
+        echo '<script src="'.Helper::options()->pluginUrl .'/superLink/superlink.js?ver=2024.01.13.01"></script>';
     }
 
 }
