@@ -29,3 +29,8 @@
     height: 500px;
   }
 }
+
+.JixinParser-card.github .iframe-container {
+  padding: 3px 10px;
+  font-size: 13px;
+}
