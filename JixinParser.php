@@ -39,6 +39,11 @@ class JixinParser{
                     $content = preg_replace('/'.preg_quote($child,'/').'/i',$this->pregGithub($strip_child),$content);
                 }
 
+                if($this->media_neteasemusic($strip_child)){
+                    //echo '解析成功';
+                    $content = preg_replace('/'.preg_quote($child,'/').'/i',$this->pregNeteasemusic($strip_child,$this->media_neteasemusic($strip_child)),$content);
+                }
+
             }
         }
         
@@ -127,6 +132,53 @@ class JixinParser{
         $iframe = preg_replace('/https?:\/\/github.com\//is','https://api.github.com/repos/',$url);
         $repo = preg_replace('/https?:\/\/github.com\//is','',$url);
         return '<div class="JixinParser-card github" data-src="'.$iframe.'"><div class="JixinParser-card-meta"><a href="'.$url.'" target="_blank" rel="external nofollow">'.$repo.'</a><span>Github</span></div><div class="iframe-container">Loading...</div></div>';
+    }
+
+    /**
+     * media_neteasemusic
+     * 
+     * @param $url 网站链接，丢进去进行判断，用于转换成iframe的url
+     * @param $type 0:返回iframe 1|other:返回id
+     * @return $iframe 若解析成功返回iframe的内容，失败的话返回布朗值0
+     */
+    private function media_neteasemusic($url,$type = 0) {
+
+        if(preg_match("/^https:\/\/music\.163\.com\/#\/song\?id=(\d+)$/is", $url, $matches)) {
+            $sid = $matches[1];
+            $iframe = 'https://music.163.com/outchain/player?type=2&id='.$sid.'&height=66';
+            if ($type == 0) {
+                return $iframe;
+            } else {
+                return $sid;
+            }
+        } else if(preg_match("/^https:\/\/music\.163\.com\/#\/playlist\?id=(\d+)$/is", $url, $matches)) {
+            $sid = $matches[1];
+            $iframe = 'https://music.163.com/outchain/player?type=0&id='.$sid;
+            if ($type == 0) {
+                return $iframe;
+            } else {
+                return $sid;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * pregNeteasemusic
+     * 解析形如网易云音乐的iframe的内容
+     * 
+     * @param $url 网站的跳转地址
+     * @param $iframe 传入解析完毕的iframe地址
+     * @return 解析好待替换的HTML内容
+     */
+    private function pregNeteasemusic($url,$iframe){
+        if(preg_match("/^https:\/\/music\.163\.com\/#\/song\?id=(\d+)$/is", $url, $matches)) {
+            $class = 'JixinParser-card neteasemusic single';
+        } else {
+            $class = 'JixinParser-card neteasemusic';
+        }
+        return '<div class="'.$class.'" data-src="'.$iframe.'"><div class="JixinParser-card-meta"><a href="'.$url.'" target="_blank" rel="external nofollow">网易云音乐 · '.$this->media_neteasemusic($url,"1").'</a><span class="fold">展开/收起</span></div><div class="iframe-container"></div></div>';
     }
 
 }
