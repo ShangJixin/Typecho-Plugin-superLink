@@ -4,7 +4,7 @@
  * 
  * @package superLink
  * @author 尚寂新
- * @version 1.5
+ * @version 1.5.1
  * @link https://github.com/ShangJixin/Typecho-Plugin-superLink
  */
 class superLink_Plugin implements Typecho_Plugin_Interface
