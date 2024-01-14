@@ -11,26 +11,35 @@
     font-size: 14px;
     cursor: pointer;
 }
-/** 用以应对引用B站视频的处理 */
 .JixinParser-card iframe {
   width: 100%;
   height: 500px;
   display: block;
 }
+/** 用以应对引用B站视频的处理 */
+.JixinParser-card.bilibili iframe {
+  height: 500px;
+  display: block;
+}
 @media only screen and (max-width:600px){
-  .JixinParser-card iframe {
-    width: 100%;
+  .JixinParser-card.bilibili iframe {
     height: auto;
   }
 }
 @media only screen and (min-width:800px){
-  .JixinParser-card iframe {
-    width: 100%;
+  .JixinParser-card.bilibili iframe {
     height: 500px;
   }
 }
-
+/** 用以应对引用Github的处理 */
 .JixinParser-card.github .iframe-container {
   padding: 3px 10px;
   font-size: 13px;
+}
+/** 用以应对引用网易云音乐的处理 */
+.JixinParser-card.neteasemusic iframe {
+  height: 500px;
+}
+.JixinParser-card.neteasemusic.single iframe {
+  height: 90px;
 }
