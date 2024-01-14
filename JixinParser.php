@@ -143,9 +143,10 @@ class JixinParser{
      */
     private function media_neteasemusic($url,$type = 0) {
 
+        $outchain = $this->isMobileDevice() ? 'https://music.163.com/m/outchain/' : 'https://music.163.com/outchain/';
         if(preg_match("/^https:\/\/music\.163\.com\/#\/song\?id=(\d+)$/is", $url, $matches)) {
             $sid = $matches[1];
-            $iframe = 'https://music.163.com/outchain/player?type=2&id='.$sid.'&height=66';
+            $iframe = $outchain . 'player?type=2&id='.$sid.'&height=66';
             if ($type == 0) {
                 return $iframe;
             } else {
@@ -153,7 +154,7 @@ class JixinParser{
             }
         } else if(preg_match("/^https:\/\/music\.163\.com\/#\/playlist\?id=(\d+)$/is", $url, $matches)) {
             $sid = $matches[1];
-            $iframe = 'https://music.163.com/outchain/player?type=0&id='.$sid;
+            $iframe = $outchain . 'player?type=0&id='.$sid;
             if ($type == 0) {
                 return $iframe;
             } else {
@@ -179,6 +180,16 @@ class JixinParser{
             $class = 'JixinParser-card neteasemusic';
         }
         return '<div class="'.$class.'" data-src="'.$iframe.'"><div class="JixinParser-card-meta"><a href="'.$url.'" target="_blank" rel="external nofollow">网易云音乐 · '.$this->media_neteasemusic($url,"1").'</a><span class="fold">展开/收起</span></div><div class="iframe-container"></div></div>';
+    }
+
+    /**
+     * isMobileDevice
+     * 粗判是否为移动端设备，解决大聪明网易的外链地址区分设备，不会自动跳转的问题
+     * 
+     * @return boolean
+     */
+    private function isMobileDevice() {
+        return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
     }
 
 }
