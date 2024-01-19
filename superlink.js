@@ -1,4 +1,4 @@
-window.onload = function() {
+var superLink = function() {
 
     document.querySelectorAll(".JixinParser-card .JixinParser-card-meta span.fold").forEach(function(element) {
         element.addEventListener("click", function() {
@@ -18,6 +18,7 @@ window.onload = function() {
         fetch(url)
             .then(response => {
                 if (!response.ok) {
+                    container.innerHTML = `HTTP error! Status: ${response.status}`;
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 return response.json();
@@ -37,3 +38,7 @@ window.onload = function() {
     });
 
 };
+
+window.onload = function() {
+    superLink();
+}
