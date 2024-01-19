@@ -44,9 +44,30 @@ https://music.163.com/#/song?id=1375725396
 
 ![NetEaseMusic-Parser](https://github.com/ShangJixin/Typecho-Plugin-superLink/assets/21075413/60cb44dc-96ce-4cb3-b79e-fd59be95f546)
 
+### [V1.6] Gitee 仓库首页卡片
+后台编辑器：
+```
+https://gitee.com/3dming/DiscuzL
+```
+经过 Typecho 的 Markdown 解析后
+```HTML
+<a href="https://gitee.com/3dming/DiscuzL">https://gitee.com/3dming/DiscuzL</a>
+```
+在 Typecho Markdown 解析的基础上，`superLink`再次对其解析，效果如下图
+
+![Gitee-Parser](https://github.com/ShangJixin/Typecho-Plugin-superLink/assets/21075413/31ad3b8d-9881-4d75-8350-a31c3ae43a44)
+
 
 - 更多功能等待更新中...
 
 ## 插件使用说明
+
+### 关于回调函数的说明
+部分 Typecho 主题使用了如`pjax`或`instantclick`等组件功能。为了能让 superLink 正常运行，需要填写回调函数。回调函数一般情况下，主题作者都会留有填写处。如不清楚回调函数应该写到哪里，请咨询开发该主题的作者。
+
+回调函数功能为 **V1.6**的新增功能。本插件的回调函数为：
+```javascript
+superLink();
+```
 
 **下载完后，请务必将本插件的文件夹的名字改为`superLink`，否则会出错！！**
