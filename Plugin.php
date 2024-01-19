@@ -4,7 +4,7 @@
  * 
  * @package superLink
  * @author 尚寂新
- * @version 1.5.1
+ * @version 1.6
  * @link https://github.com/ShangJixin/Typecho-Plugin-superLink
  */
 class superLink_Plugin implements Typecho_Plugin_Interface
@@ -82,7 +82,7 @@ class superLink_Plugin implements Typecho_Plugin_Interface
      * @return void
      */
     public static function footer() {
-        echo '<script src="'.Helper::options()->pluginUrl .'/superLink/superlink.js?ver=2024.01.13.01"></script>';
+        echo '<script src="'.Helper::options()->pluginUrl .'/superLink/superlink.js?ver=2024.01.19.01"></script>';
     }
 
 }
