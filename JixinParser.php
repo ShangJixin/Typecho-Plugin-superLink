@@ -30,18 +30,19 @@ class JixinParser{
                 $strip_child = strip_tags($child);
             
                 if($this->media_bilibili($strip_child)){
-                    //echo '解析成功';
                     $content = preg_replace('/'.preg_quote($child,'/').'/i',$this->pregBilibili($strip_child,$this->media_bilibili($strip_child)),$content);
                 }
                 
                 if($this->card_github($strip_child)){
-                    //echo '解析成功';
                     $content = preg_replace('/'.preg_quote($child,'/').'/i',$this->pregGithub($strip_child),$content);
                 }
 
                 if($this->media_neteasemusic($strip_child)){
-                    //echo '解析成功';
                     $content = preg_replace('/'.preg_quote($child,'/').'/i',$this->pregNeteasemusic($strip_child,$this->media_neteasemusic($strip_child)),$content);
+                }
+
+                if($this->card_gitee($strip_child)){
+                    $content = preg_replace('/'.preg_quote($child,'/').'/i',$this->pregGitee($strip_child),$content);
                 }
 
             }
@@ -191,5 +192,44 @@ class JixinParser{
     private function isMobileDevice() {
         return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
     }
+
+    /**
+     * card_gitee
+     * 判断 是否符合gitee repo卡片的解析条件
+     * 
+     * @param $url 需要进行判断的url
+     * @return boolean
+     */
+    private function card_gitee($url){
+        if (preg_match("/https?:\/\/gitee.com\/(.*?)\/(.*?)/is",$url,$matches)){
+            if (preg_match("/https?:\/\/gitee.com\/explore\/(.*?)/is",$url,$matches)){
+                return 0;
+            }
+            if (preg_match("/https?:\/\/gitee.com\/api\/(.*?)/is",$url,$matches)){
+                return 0;
+            }
+            if (preg_match("/https?:\/\/gitee.com\/(.*?)\/(.*?)\/(.*?)\//is",$url,$matches)){
+                return 0;
+            }
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    
+    /**
+     * pregGitee
+     * 处理Gitee卡片的HTML
+     * 
+     * @param $url 经判断为仓库首页的URL
+     * @param $iframe 此形参不起作用
+     * @return 解析好待替换的HTML内容
+     */
+    private function pregGitee($url,$iframe = NULL){
+        $iframe = preg_replace('/https?:\/\/gitee.com\//is','https://gitee.com/api/v5/repos/',$url);
+        $repo = preg_replace('/https?:\/\/gitee.com\//is','',$url);
+        return '<div class="JixinParser-card github" data-src="'.$iframe.'"><div class="JixinParser-card-meta"><a href="'.$url.'" target="_blank" rel="external nofollow">'.$repo.'</a><span>Gitee</span></div><div class="iframe-container">Loading...</div></div>';
+    }
+
 
 }
